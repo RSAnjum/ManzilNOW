@@ -1,5 +1,7 @@
+
 import 'package:flutter/material.dart';
 import 'package:manzilnow/history.dart';
+import 'package:manzilnow/updateprf.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -70,6 +72,15 @@ class _HomePageState extends State<HomePage>
                 },
               ),
               ListTile(
+                title: Text('Update profile'),
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => UpdateProfilePage()));
+                },
+              ),
+              ListTile(
                 title: Text('Logout'),
                 onTap: () {
                   Navigator.pop(context);
@@ -86,31 +97,7 @@ class _HomePageState extends State<HomePage>
           children: [],
         ),
       ),
-      bottomNavigationBar: AnimatedBuilder(
-        animation: _animationController,
-        builder: (context, child) {
-          return Transform.translate(
-            offset: Offset(0, 100 * (1 - _animation.value)),
-            child: child,
-          );
-        },
-        child: BottomNavigationBar(
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.search),
-              label: 'Search',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.person),
-              label: 'Profile',
-            ),
-          ],
-        ),
-      ),
     );
   }
 }
+             

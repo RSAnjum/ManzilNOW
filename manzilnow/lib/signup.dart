@@ -37,13 +37,29 @@ class _SignUpState extends State<SignUp> {
               ),
             ),
             const SizedBox(height: 20),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: const TextField(
-                decoration: InputDecoration(
-                  labelText: 'Full Name',
+            Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'First Name',
+                      ),
+                    ),
+                  ),
                 ),
-              ),
+                Expanded(
+                  child: Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 20),
+                    child: TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'Last Name',
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
             const SizedBox(height: 10),
             Container(
