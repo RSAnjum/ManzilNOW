@@ -7,7 +7,7 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key});
+  const MyApp({superKey, Key? key});
 
   @override
   Widget build(BuildContext context) {
@@ -43,13 +43,13 @@ class MyHomePage extends StatelessWidget {
       ),
       floatingActionButton: ElevatedButton(
         style: ElevatedButton.styleFrom(
-          primary: Colors.blue, // Set the button color to blue
-          padding: EdgeInsets.symmetric(vertical: 16, horizontal: 24), // Increase the padding for a larger button
+          backgroundColor: Colors.blue, // Set the button color to blue
+          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24), // Increase the padding for a larger button
         ),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => IntroPage()), // Navigate to the IntroPage
+            MaterialPageRoute(builder: (context) => const IntroPage()), // Navigate to the IntroPage
           );
         },
         child: const Text(

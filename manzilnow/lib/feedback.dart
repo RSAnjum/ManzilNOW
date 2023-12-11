@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class FeedbackPage extends StatefulWidget {
+  const FeedbackPage({super.key});
+
   @override
   _FeedbackPageState createState() => _FeedbackPageState();
 }
@@ -18,18 +20,18 @@ class _FeedbackPageState extends State<FeedbackPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Feedback"),
+        title: const Text("Feedback"),
       ),
       body: Container(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Select a ride to provide feedback:",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             Expanded(
               child: ListView.builder(
                 itemCount: previousRides.length,
@@ -41,9 +43,9 @@ class _FeedbackPageState extends State<FeedbackPage> {
                       });
                     },
                     child: AnimatedContainer(
-                      duration: Duration(milliseconds: 500),
+                      duration: const Duration(milliseconds: 500),
                       curve: Curves.easeInOut,
-                      margin: EdgeInsets.only(bottom: 16.0),
+                      margin: const EdgeInsets.only(bottom: 16.0),
                       decoration: BoxDecoration(
                         color: selectedCardIndex == index ? Colors.grey[200] : Colors.white,
                         borderRadius: BorderRadius.circular(8.0),
@@ -52,7 +54,7 @@ class _FeedbackPageState extends State<FeedbackPage> {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                         border: Border.all(
@@ -66,49 +68,49 @@ class _FeedbackPageState extends State<FeedbackPage> {
                             title: Row(
                               children: [
                                 Text(
-                                  "${previousRides[index].destination}",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  previousRides[index].destination,
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
-                                Icon(Icons.arrow_forward, color: Colors.green),
+                                const Icon(Icons.arrow_forward, color: Colors.green),
                                 Text(
-                                  "${previousRides[index].departure}",
-                                  style: TextStyle(fontWeight: FontWeight.bold),
+                                  previousRides[index].departure,
+                                  style: const TextStyle(fontWeight: FontWeight.bold),
                                 ),
                               ],
                             ),
                             trailing: selectedCardIndex == index
-                                ? Icon(Icons.check_circle, color: Colors.green)
+                                ? const Icon(Icons.check_circle, color: Colors.green)
                                 : null,
                           ),
                           if (selectedCardIndex == index)
                             Padding(
-                              padding: EdgeInsets.all(16.0),
+                              padding: const EdgeInsets.all(16.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  CircleAvatar(
+                                  const CircleAvatar(
                                     backgroundImage: AssetImage('assets/driver_photo.png'),
                                     radius: 40.0,
                                   ),
-                                  SizedBox(height: 16.0),
+                                  const SizedBox(height: 16.0),
                                   Text(
                                     "Driver: ${previousRides[index].driverName}",
-                                    style: TextStyle(fontWeight: FontWeight.bold),
+                                    style: const TextStyle(fontWeight: FontWeight.bold),
                                   ),
-                                  SizedBox(height: 8.0),
+                                  const SizedBox(height: 8.0),
                                   Row(
                                     children: [
-                                      Icon(Icons.attach_money, color: Colors.green),
-                                      SizedBox(width: 4.0),
-                                      Text("${previousRides[index].fare}"),
+                                      const Icon(Icons.attach_money, color: Colors.green),
+                                      const SizedBox(width: 4.0),
+                                      Text(previousRides[index].fare),
                                     ],
                                   ),
-                                  SizedBox(height: 8.0),
+                                  const SizedBox(height: 8.0),
                                   Row(
                                     children: [
-                                      Icon(Icons.access_time, color: Colors.green),
-                                      SizedBox(width: 4.0),
-                                      Text("${previousRides[index].time}"),
+                                      const Icon(Icons.access_time, color: Colors.green),
+                                      const SizedBox(width: 4.0),
+                                      Text(previousRides[index].time),
                                     ],
                                   ),
                                 ],
@@ -121,18 +123,18 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 },
               ),
             ),
-            SizedBox(height: 16.0),
-            Text(
+            const SizedBox(height: 16.0),
+            const Text(
               "Describe your feedback:",
               style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold),
             ),
-            SizedBox(height: 8.0),
+            const SizedBox(height: 8.0),
             Container(
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8.0),
                 color: Colors.grey[200],
               ),
-              child: TextField(
+              child: const TextField(
                 maxLines: 5,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -140,12 +142,12 @@ class _FeedbackPageState extends State<FeedbackPage> {
                 ),
               ),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
             ElevatedButton(
               onPressed: () {
                 // Submit button logic
               },
-              child: Text("Submit"),
+              child: const Text("Submit"),
             ),
           ],
         ),

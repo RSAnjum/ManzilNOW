@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'login.dart'; // Import the Login class
 
 class SignUp extends StatefulWidget {
+  const SignUp({super.key});
+
   @override
   _SignUpState createState() => _SignUpState();
 }
@@ -10,12 +12,9 @@ class SignUp extends StatefulWidget {
 class _SignUpState extends State<SignUp> {
   String _emailError = '';
   String _phoneNumberError = '';
-  RegExp _emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+  final RegExp _emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
 
   bool isNumeric(String value) {
-    if (value == null) {
-      return false;
-    }
     return double.tryParse(value) != null;
   }
 
@@ -23,34 +22,34 @@ class _SignUpState extends State<SignUp> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Sign Up'),
+        title: const Text('Sign Up'),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Image.asset(
                 'assets/logo.png',
                 height: 200,
                 width: 200,
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
+              margin: const EdgeInsets.symmetric(horizontal: 20),
+              child: const TextField(
                 decoration: InputDecoration(
                   labelText: 'Full Name',
                 ),
               ),
             ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Email',
                 ),
                 onChanged: (value) {
@@ -63,22 +62,22 @@ class _SignUpState extends State<SignUp> {
                     }
                   });
                 },
-                style: _emailError != '' ? TextStyle(color: Colors.red) : TextStyle(color: Colors.black),
+                style: _emailError != '' ? const TextStyle(color: Colors.red) : const TextStyle(color: Colors.black),
               ),
             ),
             if (_emailError != '')
               Padding(
-                padding: EdgeInsets.only(top: 8.0),
+                padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
                   _emailError,
-                  style: TextStyle(color: Colors.red),
+                  style: const TextStyle(color: Colors.red),
                 ),
               ),
-            SizedBox(height: 10),
+            const SizedBox(height: 10),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 20),
+              margin: const EdgeInsets.symmetric(horizontal: 20),
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Phone Number',
                 ),
                 onChanged: (value) {
@@ -92,38 +91,37 @@ class _SignUpState extends State<SignUp> {
                     }
                   });
                 },
-                style: _phoneNumberError != '' ? TextStyle(color: Colors.red) : TextStyle(color: Colors.black),
+                style: _phoneNumberError != '' ? const TextStyle(color: Colors.red) : const TextStyle(color: Colors.black),
               ),
             ),
           
-            if (_phoneNumberError != null)
-              Padding(
-                padding: EdgeInsets.only(top: 8.0),
-                child: Text(
-                  _phoneNumberError,
-                  style: TextStyle(color: Colors.red),
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 8.0),
+              child: Text(
+                _phoneNumberError,
+                style: const TextStyle(color: Colors.red),
               ),
-            SizedBox(height: 20),
+            ),
+            const SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {
                 // TODO: Implement sign up logic
               },
-              child: Text('Sign Up'),
+              child: const Text('Sign Up'),
             ),
-            SizedBox(height: 10),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 10),
+            const SizedBox(height: 16.0),
             TextButton(
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Login()), // Use the Login class
+                  MaterialPageRoute(builder: (context) => const Login()), // Use the Login class
                 );
               },
               style: ButtonStyle(
                 overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
               ),
-              child: Text(
+              child: const Text(
                 'Already have an account? Sign in',
                 style: TextStyle(
                   decoration: TextDecoration.underline,
@@ -131,7 +129,7 @@ class _SignUpState extends State<SignUp> {
                 ),
               ),
             ),
-            SizedBox(height: 20),
+            const SizedBox(height: 20),
           ],
         ),
       ),

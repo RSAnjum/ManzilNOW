@@ -1,46 +1,44 @@
-
 import 'package:flutter/material.dart';
-import 'package:manzilnow/complaint.dart';
-import 'package:manzilnow/feedback.dart';
+import 'package:manzilnow/homepage.dart';
+import 'history.dart';
 import 'signup.dart';
 
 class Login extends StatefulWidget {
+  const Login({super.key});
+
   @override
   _LoginState createState() => _LoginState();
 }
 
 class _LoginState extends State<Login> {
-  bool _passwordVisible = false;
-  String _phoneNumberError ='';
+  final bool _passwordVisible = false;
+  String _phoneNumberError = '';
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login'),
+        title: const Text('Login'),
       ),
       body: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(height: 50.0),
+              const SizedBox(height: 50.0),
               Image.asset(
                 'assets/logo.png',
                 height: MediaQuery.of(context).size.height * 0.2,
               ),
-              SizedBox(height: 50.0),
+              const SizedBox(height: 50.0),
               TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Phone Number',
                 ),
                 onChanged: (value) {
                   setState(() {
                     bool isNumeric(String value) {
-                      if (value == null) {
-                        return false;
-                      }
                       return double.tryParse(value) != null;
                     }
 
@@ -53,36 +51,39 @@ class _LoginState extends State<Login> {
                     }
                   });
                 },
-                style: _phoneNumberError != '' ? TextStyle(color: Colors.red) : TextStyle(color: Colors.black),
+                style: _phoneNumberError != ''
+                    ? const TextStyle(color: Colors.red)
+                    : const TextStyle(color: Colors.black),
               ),
-              if (_phoneNumberError != null)
-                Padding(
-                  padding: EdgeInsets.only(top: 8.0),
-                  child: Text(
-                    _phoneNumberError,
-                    style: TextStyle(color: Colors.red),
-                  ),
+              Padding(
+                padding: const EdgeInsets.only(top: 8.0),
+                child: Text(
+                  _phoneNumberError,
+                  style: const TextStyle(color: Colors.red),
                 ),
-
-              SizedBox(height: 16.0),
+              ),
+              const SizedBox(height: 16.0),
               ElevatedButton.icon(
                 onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
                 },
-                icon: Icon(Icons.login),
-                label: Text('Login'),
+                icon: const Icon(Icons.login),
+                label: const Text('Login'),
               ),
-              SizedBox(height: 16.0),
+              const SizedBox(height: 16.0),
               TextButton(
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => SignUp()),
+                    MaterialPageRoute(builder: (context) => const SignUp()),
                   );
                 },
                 style: ButtonStyle(
-                  overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
+                  overlayColor:
+                      MaterialStateProperty.all<Color>(Colors.transparent),
                 ),
-                child: Text(
+                child: const Text(
                   'Don\'t have an account? Sign up',
                   style: TextStyle(
                     decoration: TextDecoration.underline,
