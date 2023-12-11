@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:manzilnow/homepage.dart';
-import 'history.dart';
 import 'signup.dart';
 
 class Login extends StatefulWidget {
@@ -11,7 +10,6 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final bool _passwordVisible = false;
   String _phoneNumberError = '';
 
   @override
