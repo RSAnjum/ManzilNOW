@@ -73,8 +73,7 @@ import 'package:flutter/material.dart';
                 }
               },
               style: ElevatedButton.styleFrom(
-                primary: Colors.blue,
-                onPrimary: Colors.white,
+                foregroundColor: Colors.white, backgroundColor: Colors.blue,
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),

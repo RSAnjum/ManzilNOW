@@ -11,7 +11,7 @@ class DriverDetailsPage extends StatelessWidget {
   final String date;
   final String status;
 
-  DriverDetailsPage({
+  const DriverDetailsPage({super.key, 
     required this.driverName,
     required this.rideID,
     required this.fare,
@@ -26,9 +26,9 @@ class DriverDetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Driver Details'),
+        title: const Text('Driver Details'),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -36,68 +36,68 @@ class DriverDetailsPage extends StatelessWidget {
       ),
       body: Column(
         children: [
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Profile photo
-          CircleAvatar(
+          const CircleAvatar(
             radius: 50,
             backgroundImage: AssetImage('assets/driver_photo.png'),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Driver name
           Text(
             driverName,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 24,
               fontWeight: FontWeight.bold,
             ),
           ),
-          SizedBox(height: 16),
+          const SizedBox(height: 16),
           // Ride ID
           ListTile(
-            leading: Icon(Icons.confirmation_number),
-            title: Text('Ride ID'),
+            leading: const Icon(Icons.confirmation_number),
+            title: const Text('Ride ID'),
             subtitle: Text(rideID),
           ),
           // Fare
           ListTile(
-            leading: Icon(Icons.attach_money),
-            title: Text('Fare'),
+            leading: const Icon(Icons.attach_money),
+            title: const Text('Fare'),
             subtitle: Text('\$$fare'),
           ),
           // Destination
           ListTile(
-            leading: Icon(Icons.location_on),
-            title: Text('Destination'),
+            leading: const Icon(Icons.location_on),
+            title: const Text('Destination'),
             subtitle: Text(destination),
           ),
           // Departure
           ListTile(
-            leading: Icon(Icons.location_on),
-            title: Text('Departure'),
+            leading: const Icon(Icons.location_on),
+            title: const Text('Departure'),
             subtitle: Text(departure),
           ),
           // Time
           ListTile(
-            leading: Icon(Icons.access_time),
-            title: Text('Time'),
+            leading: const Icon(Icons.access_time),
+            title: const Text('Time'),
             subtitle: Text(time),
           ),
           // Date
           ListTile(
-            leading: Icon(Icons.calendar_today),
-            title: Text('Date'),
+            leading: const Icon(Icons.calendar_today),
+            title: const Text('Date'),
             subtitle: Text(date),
           ),
           // Status
           ListTile(
-            leading: Icon(Icons.info),
-            title: Text('Status'),
+            leading: const Icon(Icons.info),
+            title: const Text('Status'),
             subtitle: Text(status),
           ),
         ],
       ),
       floatingActionButton: Padding(
-        padding: EdgeInsets.only(top: 16),
+        padding: const EdgeInsets.only(top: 16),
         child: FloatingActionButton.extended(
           onPressed: () {
             showDialog(
@@ -107,7 +107,7 @@ class DriverDetailsPage extends StatelessWidget {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(16.0),
                   ),
-                  title: Text('Report an issue'),
+                  title: const Text('Report an issue'),
                   content: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class UpdateProfilePage extends StatefulWidget {
+  const UpdateProfilePage({super.key});
+
   @override
   _UpdateProfilePageState createState() => _UpdateProfilePageState();
 }
@@ -20,11 +22,11 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text('Success'),
+          title: const Text('Success'),
           content: const Text('Changes saved successfully!'),
           actions: [
             TextButton(
-              child: Text('OK'),
+              child: const Text('OK'),
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).pop();
@@ -40,7 +42,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Update Profile'),
+        title: const Text('Update Profile'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -59,9 +61,9 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
               onPressed: () {
                 // Implement your logic to change profile photo here
               },
-              child: Text('Change Profile Photo'),
+              child: const Text('Change Profile Photo'),
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // First name section
             TextField(
@@ -78,7 +80,7 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
 
             // Last name section
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Last Name',
               ),
               onChanged: (value) {
@@ -87,11 +89,11 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 });
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Email section
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email',
               ),
               onChanged: (value) {
@@ -100,11 +102,11 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 });
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Phone number section
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Phone Number',
               ),
               onChanged: (value) {
@@ -113,12 +115,12 @@ class _UpdateProfilePageState extends State<UpdateProfilePage> {
                 });
               },
             ),
-            SizedBox(height: 16.0),
+            const SizedBox(height: 16.0),
 
             // Save changes button
             ElevatedButton(
               onPressed: _saveChanges,
-              child: Text('Save Changes'),
+              child: const Text('Save Changes'),
             ),
           ],
         ),

@@ -4,6 +4,8 @@ import 'package:manzilnow/history.dart';
 import 'package:manzilnow/updateprf.dart';
 
 class HomePage extends StatefulWidget {
+  const HomePage({super.key});
+
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -22,7 +24,7 @@ class _HomePageState extends State<HomePage>
     super.initState();
     _animationController = AnimationController(
       vsync: this,
-      duration: Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 500),
     );
     _animation = Tween<double>(begin: 0, end: 1).animate(CurvedAnimation(
       parent: _animationController,
@@ -41,7 +43,7 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Homepage'),
+        title: const Text('Homepage'),
         backgroundColor: Colors.blue,
         elevation: 0,
       ),
@@ -65,23 +67,23 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               ListTile(
-                title: Text('View history'),
+                title: const Text('View history'),
                 onTap: () {
                   Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => HistoryPage()));
+                      MaterialPageRoute(builder: (context) => const HistoryPage()));
                 },
               ),
               ListTile(
-                title: Text('Update profile'),
+                title: const Text('Update profile'),
                 onTap: () {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => UpdateProfilePage()));
+                          builder: (context) => const UpdateProfilePage()));
                 },
               ),
               ListTile(
-                title: Text('Logout'),
+                title: const Text('Logout'),
                 onTap: () {
                   Navigator.pop(context);
                   Navigator.pop(context);
@@ -91,7 +93,7 @@ class _HomePageState extends State<HomePage>
           ),
         ),
       ),
-      body: Center(
+      body: const Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [],

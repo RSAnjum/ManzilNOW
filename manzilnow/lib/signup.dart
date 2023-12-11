@@ -42,8 +42,8 @@ class _SignUpState extends State<SignUp> {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      decoration: const InputDecoration(
+                    child: const TextField(
+                      decoration: InputDecoration(
                         labelText: 'First Name',
                       ),
                     ),
@@ -52,8 +52,8 @@ class _SignUpState extends State<SignUp> {
                 Expanded(
                   child: Container(
                     margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextField(
-                      decoration: const InputDecoration(
+                    child: const TextField(
+                      decoration: InputDecoration(
                         labelText: 'Last Name',
                       ),
                     ),

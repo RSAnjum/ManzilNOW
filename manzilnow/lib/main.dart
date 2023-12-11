@@ -1,20 +1,35 @@
-
+import 'dart:io';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'intro.dart'; // Import the intro.dart file
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding
+      .ensureInitialized(); // Ensure Flutter binding is initialized first
+  Platform.isAndroid
+      ? await Firebase.initializeApp(
+          options: const FirebaseOptions(
+            apiKey: "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8",
+            appId: "1:155049926723:android:2d4c31d5fc4641560c74f6",
+            messagingSenderId: "155049926723",
+            projectId: "manzilnow-becc3",
+            storageBucket: "manzilnow-becc3.appspot.com",
+          ),
+        )
+      : null;
   runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({superKey, Key? key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primaryColor: Colors.cyan[700], // Set the primary color to a shade of cyan
+        primaryColor:
+            Colors.cyan[700], // Set the primary color to a shade of cyan
       ),
       home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
@@ -44,17 +59,24 @@ class MyHomePage extends StatelessWidget {
       floatingActionButton: ElevatedButton(
         style: ElevatedButton.styleFrom(
           backgroundColor: Colors.blue, // Set the button color to blue
-          padding: const EdgeInsets.symmetric(vertical: 16, horizontal: 24), // Increase the padding for a larger button
+          padding: const EdgeInsets.symmetric(
+              vertical: 16,
+              horizontal: 24), // Increase the padding for a larger button
         ),
         onPressed: () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => const IntroPage()), // Navigate to the IntroPage
+            MaterialPageRoute(
+                builder: (context) =>
+                    const IntroPage()), // Navigate to the IntroPage
           );
         },
         child: const Text(
           'Get Started',
-          style: TextStyle(fontSize: 18, color: Colors.white), // Increase the font size and set the text color to white
+          style: TextStyle(
+              fontSize: 18,
+              color: Colors
+                  .white), // Increase the font size and set the text color to white
         ),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,

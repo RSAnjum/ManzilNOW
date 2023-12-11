@@ -2,6 +2,8 @@
 import 'package:flutter/material.dart';
 import 'driverdetails.dart';
 class HistoryPage extends StatefulWidget {
+  const HistoryPage({super.key});
+
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }
@@ -50,9 +52,9 @@ class _HistoryPageState extends State<HistoryPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("History Page"), // Add a title to the AppBar
+        title: const Text("History Page"), // Add a title to the AppBar
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.pop(context);
           },
@@ -181,8 +183,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                     const SizedBox(height: 16.0),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        primary: Colors.green, // Set background color to green
-                                        onPrimary: Colors.white, // Set text color to white
+                                        foregroundColor: Colors.white, backgroundColor: Colors.green, // Set text color to white
                                       ),
                                       onPressed: () {
                                         Navigator.push(
@@ -202,7 +203,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                         );
                                       },
                                       
-                                      child: Text('Details'),
+                                      child: const Text('Details'),
                                     ),
                                   ],
                                 ),
