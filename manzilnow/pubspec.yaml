@@ -33,7 +33,7 @@ dependencies:
     
   carousel_slider: ^4.2.1
   firebase_core: ^2.24.1
-  firebase_auth: ^4.15.1
+  firebase_auth: ^4.15.2
   firebase_database: ^10.3.7
   image_picker: ^1.0.4
   firebase_storage: ^11.5.4
