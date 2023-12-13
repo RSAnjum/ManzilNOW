@@ -11,86 +11,42 @@ class HistoryPage extends StatefulWidget {
   _HistoryPageState createState() => _HistoryPageState();
 }
 
+class PreviousRide {
+  final String rideID;
+  final String driverID;
+  final String userID;
+  final String date;
+  final String time;
+  final String departure;
+  final String destination;
+  final String fare;
+  final String status;
+  final String driverFirstName;
+  final String driverLastName;
+  final String driverPhoto;
+
+  PreviousRide({
+    required this.rideID,
+    required this.driverID,
+    required this.userID,
+    required this.date,
+    required this.time,
+    required this.departure,
+    required this.destination,
+    required this.fare,
+    required this.status,
+    required this.driverFirstName,
+    required this.driverLastName,
+    required this.driverPhoto,
+  });
+}
+
 class _HistoryPageState extends State<HistoryPage> {
   int selectedCardIndex = -1;
-  List<PreviousRide> previousRides = [
-    PreviousRide(
-      rideID: "1",
-      driverID: "D001",
-      userID: "U001",
-      date: "2022-10-01",
-      time: "10:00 AM",
-      departure: "Location A",
-      destination: "Location B",
-      fare: "20.00",
-      status: "Completed",
-      driverFirstName: "John",
-      driverLastName: "Doe",
-      driverPhoto: "driver1.jpg",
-    ),
-    PreviousRide(
-      rideID: "2",
-      driverID: "D002",
-      userID: "U002",
-      date: "2022-10-02",
-      time: "11:00 AM",
-      departure: "Location C",
-      destination: "Location D",
-      fare: "15.00",
-      status: "Completed",
-      driverFirstName: "Jane",
-      driverLastName: "Smith",
-      driverPhoto: "driver2.jpg",
-    ),
-    PreviousRide(
-      rideID: "3",
-      driverID: "D003",
-      userID: "U003",
-      date: "2022-10-03",
-      time: "12:00 PM",
-      departure: "Location E",
-      destination: "Location F",
-      fare: "25.00",
-      status: "Completed",
-      driverFirstName: "David",
-      driverLastName: "Johnson",
-      driverPhoto: "driver3.jpg",
-    ),
-    PreviousRide(
-      rideID: "4",
-      driverID: "D004",
-      userID: "U004",
-      date: "2022-10-04",
-      time: "1:00 PM",
-      departure: "Location G",
-      destination: "Location H",
-      fare: "18.00",
-      status: "Completed",
-      driverFirstName: "Sarah",
-      driverLastName: "Williams",
-      driverPhoto: "driver4.jpg",
-    ),
-    PreviousRide(
-      rideID: "5",
-      driverID: "D005",
-      userID: "U005",
-      date: "2022-10-05",
-      time: "2:00 PM",
-      departure: "Location I",
-      destination: "Location J",
-      fare: "30.00",
-      status: "Completed",
-      driverFirstName: "Michael",
-      driverLastName: "Brown",
-      driverPhoto: "driver5.jpg",
-    ),
-  ];
 
   Future<void> fetchPreviousRides() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     String passengerId = prefs.getString('token') ?? '';
-    print("sup nig:");
-    print(passengerId);
     DatabaseReference rideRef =
         FirebaseDatabase.instance.reference().child('Ride');
     DatabaseReference driverRef =
@@ -107,21 +63,16 @@ class _HistoryPageState extends State<HistoryPage> {
           if (ridesData != null) {
             ridesData.forEach((key, value) async {
               String driverID = value['driverid'];
-
-              // Fetch driver details
               await driverRef
                   .child(driverID)
                   .once()
                   .then((DataSnapshot driverSnapshot) {
                     Map<dynamic, dynamic>? driverData =
                         driverSnapshot.value as Map<dynamic, dynamic>?;
-
                     if (driverData != null) {
                       String firstName = driverData['firstName'];
                       String lastName = driverData['lastName'];
                       String personalPhoto = driverData['personalPhoto'];
-
-                      // Create a new PreviousRide object with driver details
                       PreviousRide ride = PreviousRide(
                         rideID: value['rideid'],
                         driverID: driverID,
@@ -329,34 +280,77 @@ class _HistoryPageState extends State<HistoryPage> {
       ),
     );
   }
-}
 
-class PreviousRide {
-  final String rideID;
-  final String driverID;
-  final String userID;
-  final String date;
-  final String time;
-  final String departure;
-  final String destination;
-  final String fare;
-  final String status;
-  final String driverFirstName;
-  final String driverLastName;
-  final String driverPhoto;
-
-  PreviousRide({
-    required this.rideID,
-    required this.driverID,
-    required this.userID,
-    required this.date,
-    required this.time,
-    required this.departure,
-    required this.destination,
-    required this.fare,
-    required this.status,
-    required this.driverFirstName,
-    required this.driverLastName,
-    required this.driverPhoto,
-  });
+  List<PreviousRide> previousRides = [
+    PreviousRide(
+      rideID: "1",
+      driverID: "D001",
+      userID: "U001",
+      date: "2022-10-01",
+      time: "10:00 AM",
+      departure: "Location A",
+      destination: "Location B",
+      fare: "20.00",
+      status: "Completed",
+      driverFirstName: "John",
+      driverLastName: "Doe",
+      driverPhoto: "driver1.jpg",
+    ),
+    PreviousRide(
+      rideID: "2",
+      driverID: "D002",
+      userID: "U002",
+      date: "2022-10-02",
+      time: "11:00 AM",
+      departure: "Location C",
+      destination: "Location D",
+      fare: "15.00",
+      status: "Completed",
+      driverFirstName: "Jane",
+      driverLastName: "Smith",
+      driverPhoto: "driver2.jpg",
+    ),
+    PreviousRide(
+      rideID: "3",
+      driverID: "D003",
+      userID: "U003",
+      date: "2022-10-03",
+      time: "12:00 PM",
+      departure: "Location E",
+      destination: "Location F",
+      fare: "25.00",
+      status: "Completed",
+      driverFirstName: "David",
+      driverLastName: "Johnson",
+      driverPhoto: "driver3.jpg",
+    ),
+    PreviousRide(
+      rideID: "4",
+      driverID: "D004",
+      userID: "U004",
+      date: "2022-10-04",
+      time: "1:00 PM",
+      departure: "Location G",
+      destination: "Location H",
+      fare: "18.00",
+      status: "Completed",
+      driverFirstName: "Sarah",
+      driverLastName: "Williams",
+      driverPhoto: "driver4.jpg",
+    ),
+    PreviousRide(
+      rideID: "5",
+      driverID: "D005",
+      userID: "U005",
+      date: "2022-10-05",
+      time: "2:00 PM",
+      departure: "Location I",
+      destination: "Location J",
+      fare: "30.00",
+      status: "Completed",
+      driverFirstName: "Michael",
+      driverLastName: "Brown",
+      driverPhoto: "driver5.jpg",
+    ),
+  ];
 }
