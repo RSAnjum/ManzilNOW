@@ -59,6 +59,13 @@ android {
             signingConfig signingConfigs.debug
         }
     }
+
+    lintOptions {
+        warningsAsErrors true
+        enable 'deprecation'
+        checkReleaseBuilds false
+    }
+
 }
 
 flutter {
@@ -68,4 +75,5 @@ flutter {
 dependencies {
     implementation("com.google.firebase:firebase-analytics")
     implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation 'com.google.firebase:firebase-appcheck:0.2.1+8'
 }

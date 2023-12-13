@@ -1,151 +1,333 @@
-
+import 'login.dart';
 import 'package:flutter/material.dart';
-import 'login.dart'; // Import the Login class
+import 'package:firebase_database/firebase_database.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
-
-  @override
-  _SignUpState createState() => _SignUpState();
+class Passenger {
+  late String firstName;
+  late String lastName;
+  late String email;
+  late String password;
+  late String phoneNumber;
+  late String? gender;
+  late String? dateOfBirth;
 }
 
-class _SignUpState extends State<SignUp> {
-  String _emailError = '';
-  String _phoneNumberError = '';
-  final RegExp _emailRegex = RegExp(r'^[\w-]+(\.[\w-]+)*@([\w-]+\.)+[a-zA-Z]{2,7}$');
+class Signup extends StatefulWidget {
+  const Signup({Key? key}) : super(key: key);
 
-  bool isNumeric(String value) {
-    return double.tryParse(value) != null;
+  @override
+  _SignupState createState() => _SignupState();
+}
+
+class _SignupState extends State<Signup> {
+  final Passenger driver = Passenger();
+  final databaseReference = FirebaseDatabase.instance.reference().child("passenger");
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
+  final TextEditingController emailController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
+  final TextEditingController phoneNumberController = TextEditingController();
+  String? selectedGender;
+  DateTime? selectedDate;
+  late String passengerID;
+
+  bool validateEmail(String email) {
+    // Basic email validation using regex
+    return RegExp(
+      r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9]+\.[a-zA-Z]+$",
+    ).hasMatch(email);
+  }
+
+  bool validatePhoneNumber(String phoneNumber) {
+    // Validate phone number consists of 10 digits
+    return phoneNumber.length == 10 && int.tryParse(phoneNumber) != null;
+  }
+
+  void validateAndSubmit() {
+    if (
+      firstNameController.text.isEmpty ||
+      lastNameController.text.isEmpty ||
+      emailController.text.isEmpty ||
+      passwordController.text.isEmpty ||
+      phoneNumberController.text.isEmpty ||
+      selectedGender == null ||
+      selectedDate == null
+    ) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter all fields"),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    if (!validateEmail(emailController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter a valid email address"),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    if (!validatePhoneNumber(phoneNumberController.text)) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("Please enter a valid phone number"),
+          duration: Duration(seconds: 2),
+        ),
+      );
+      return;
+    }
+
+    passengerID = DateTime.now().microsecondsSinceEpoch.toString();
+
+    // Set user details
+    driver.firstName = firstNameController.text;
+    driver.lastName = lastNameController.text;
+    driver.email = emailController.text;
+    driver.password = passwordController.text;
+    driver.phoneNumber = phoneNumberController.text;
+    driver.gender = selectedGender;
+    driver.dateOfBirth = selectedDate!.toIso8601String();
+
+    // Add user details to the Firebase Realtime Database
+    databaseReference.child(passengerID).set({
+      "passengerId": passengerID,
+      "firstName": driver.firstName,
+      "lastName": driver.lastName,
+      "email": driver.email,
+      "password": driver.password,
+      "phoneNumber": driver.phoneNumber,
+      "dateOfBirth": driver.dateOfBirth,
+      "gender": driver.gender,
+      "restrictUser": false,
+    });
+
+    // Navigate to the next screen (VehicleRegistration)
+    Navigator.push(
+      context,
+      MaterialPageRoute(builder: (context) => Login()),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Sign Up'),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 20),
             Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: Image.asset(
-                'assets/logo.png',
-                height: 200,
-                width: 200,
+              height: MediaQuery.of(context).size.height * 0.3,
+              child: Align(
+                alignment: Alignment.topCenter,
+                child: Image.asset(
+                  'assets/logo.png',
+                  width: 400,
+                  height: 600,
+                ),
               ),
             ),
-            const SizedBox(height: 20),
-            Row(
-              children: [
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const TextField(
+            SizedBox(height: 25.0),
+            Text(
+              'Signup',
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            SizedBox(height: 50.0),
+            SizedBox(
+              width: 300.0,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: TextField(
+                      controller: firstNameController,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
                       decoration: InputDecoration(
+                        border: OutlineInputBorder(),
                         labelText: 'First Name',
+                        prefixIcon: Icon(Icons.person),
                       ),
                     ),
                   ),
-                ),
-                Expanded(
-                  child: Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 20),
-                    child: const TextField(
+                  SizedBox(width: 16.0),
+                  Expanded(
+                    child: TextField(
+                      controller: lastNameController,
+                      style: TextStyle(
+                        fontSize: 15,
+                      ),
                       decoration: InputDecoration(
+                        border: OutlineInputBorder(),
                         labelText: 'Last Name',
                       ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            SizedBox(height: 15.0),
+            SizedBox(
+              width: 300.0,
+              child: TextField(
+                controller: emailController,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+                keyboardType: TextInputType.emailAddress,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Email',
+                  prefixIcon: Icon(Icons.email),
+                  hintText: 'Enter your email ID',
+                ),
+              ),
+            ),
+            SizedBox(height: 15.0),
+            SizedBox(
+              width: 300.0,
+              child: TextField(
+                controller: passwordController,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+                obscureText: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Password',
+                  prefixIcon: Icon(Icons.security),
+                ),
+              ),
+            ),
+            SizedBox(height: 15.0),
+            SizedBox(
+              width: 300.0,
+              child: TextField(
+                controller: phoneNumberController,
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+                keyboardType: TextInputType.phone,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Phone Number',
+                  prefixText: '+92 ',
+                  prefixIcon: Icon(Icons.phone),
+                ),
+              ),
+            ),
+            SizedBox(height: 15.0),
+            SizedBox(
+              width: 300.0,
+              child: DropdownButtonFormField<String>(
+                value: selectedGender,
+                isDense: true,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Gender',
+                  prefixIcon: Icon(Icons.person_2_outlined),
+                ),
+                items: <String>['Male', 'Female', 'Other']
+                    .map((String value) {
+                  return DropdownMenuItem<String>(
+                    value: value,
+                    child: Text(value),
+                  );
+                }).toList(),
+                onChanged: (String? value) {
+                  setState(() {
+                    selectedGender = value;
+                  });
+                },
+              ),
+            ),
+            SizedBox(height: 15.0),
+            SizedBox(
+              width: 300.0,
+              child: TextFormField(
+                style: TextStyle(
+                  fontSize: 15,
+                ),
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Date of Birth',
+                  prefixIcon: Icon(Icons.calendar_today),
+                ),
+                readOnly: true,
+                onTap: () async {
+                  DateTime? pickedDate = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+
+                  if (pickedDate != null && pickedDate != selectedDate) {
+                    // Date selected
+                    setState(() {
+                      selectedDate = pickedDate;
+                    });
+                  }
+                },
+              ),
+            ),
+           // ... (Previous code)
+
+            SizedBox(height: 10.0),
+             Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text("Already Have an Account? "),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Login()),
+                    );
+                  },
+                  child: Text(
+                    "Sign In",
+                    style: TextStyle(
+                      color: Color(0xFF4A5899), // Set the link color
+                      fontWeight: FontWeight.bold,
+                      decoration: TextDecoration.underline,
                     ),
                   ),
                 ),
               ],
             ),
-            const SizedBox(height: 10),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Email',
+            SizedBox(height: 16.0),
+
+            Align(
+              alignment: Alignment.center,
+              child: ElevatedButton(
+                onPressed: validateAndSubmit,
+                style: ElevatedButton.styleFrom(
+                  primary: Color(0xFF4A5899),
+                  minimumSize: Size(120.0, 50.0),
                 ),
-                onChanged: (value) {
-                  // Check email validity when user finishes typing
-                  setState(() {
-                    if (value.isNotEmpty && !_emailRegex.hasMatch(value)) {
-                      _emailError = 'Invalid email';
-                    } else {
-                      _emailError = '';
-                    }
-                  });
-                },
-                style: _emailError != '' ? const TextStyle(color: Colors.red) : const TextStyle(color: Colors.black),
-              ),
-            ),
-            if (_emailError != '')
-              Padding(
-                padding: const EdgeInsets.only(top: 8.0),
                 child: Text(
-                  _emailError,
-                  style: const TextStyle(color: Colors.red),
-                ),
-              ),
-            const SizedBox(height: 10),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 20),
-              child: TextField(
-                decoration: const InputDecoration(
-                  labelText: 'Phone Number',
-                ),
-                onChanged: (value) {
-                  setState(() {
-                    if (value.isNotEmpty && !isNumeric(value)) {
-                      _phoneNumberError = 'Invalid phone number';
-                    } else if (value.length > 11) {
-                      _phoneNumberError = 'Phone number is too long';
-                    } else {
-                      _phoneNumberError = '';
-                    }
-                  });
-                },
-                style: _phoneNumberError != '' ? const TextStyle(color: Colors.red) : const TextStyle(color: Colors.black),
-              ),
-            ),
-          
-            Padding(
-              padding: const EdgeInsets.only(top: 8.0),
-              child: Text(
-                _phoneNumberError,
-                style: const TextStyle(color: Colors.red),
-              ),
-            ),
-            const SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                // TODO: Implement sign up logic
-              },
-              child: const Text('Sign Up'),
-            ),
-            const SizedBox(height: 10),
-            const SizedBox(height: 16.0),
-            TextButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => const Login()), // Use the Login class
-                );
-              },
-              style: ButtonStyle(
-                overlayColor: MaterialStateProperty.all<Color>(Colors.transparent),
-              ),
-              child: const Text(
-                'Already have an account? Sign in',
-                style: TextStyle(
-                  decoration: TextDecoration.underline,
-                  color: Colors.blue,
+                  'Continue',
+                  style: TextStyle(
+                    color: Colors.black,
+                  ),
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+
+                       SizedBox(height: 16.0),
+
           ],
         ),
       ),

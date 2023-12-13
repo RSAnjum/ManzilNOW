@@ -1,23 +1,26 @@
 import 'dart:io';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'intro.dart'; // Import the intro.dart file
+import 'intro.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding
-      .ensureInitialized(); // Ensure Flutter binding is initialized first
+      .ensureInitialized();
   Platform.isAndroid
       ? await Firebase.initializeApp(
           options: const FirebaseOptions(
-            apiKey: "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8",
-            appId: "1:155049926723:android:2d4c31d5fc4641560c74f6",
-            messagingSenderId: "155049926723",
-            projectId: "manzilnow-becc3",
-            storageBucket: "manzilnow-becc3.appspot.com",
+            apiKey: "AIzaSyCLKQ7Aehh1gVhqTQ7QmMlOB1DAVpbX098",
+            appId: "1:930777869598:android:2f07325d0e4082f5d3ad0f",
+            messagingSenderId: "167105191237",
+            projectId: "manzilnow",
+            storageBucket: "manzilnow.appspot.com",
           ),
         )
       : null;
-  runApp(const MyApp());
+  runApp(MaterialApp(
+    debugShowCheckedModeBanner: false,
+    home: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -36,50 +39,55 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  final String title;
+  class MyHomePage extends StatelessWidget {
+    const MyHomePage({Key? key, required this.title}) : super(key: key);
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Image.asset(
-              'assets/logo.png', // Replace the FlutterLogo with an image named logo.png in the assets folder
-              width: 500 * 5, // Increase the width of the image by 5x
+    final String title;
+
+    @override
+    Widget build(BuildContext context) {
+      return Scaffold(
+        backgroundColor: const Color(0xFF1F1B2F), // Set the background color to #1F1B2F
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Expanded(
+                child: Image.asset(
+                  'assets/splash.png',
+                  fit: BoxFit.cover, // Make the image fill the screen
+                ),
+              ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+        floatingActionButton: ElevatedButton(
+          style: ElevatedButton.styleFrom(
+            backgroundColor: const Color(0xFF0DF5E3), // Set the background color to #0DF5E3
+            padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 32), // Increase padding
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(50), // Make the button circular
             ),
-            const SizedBox(height: 20),
-          ],
+          ),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const IntroPage()),
+            );
+          },
+          child: const Text(
+            'GET STARTED',
+            style: TextStyle(
+              fontFamily: 'Sans',
+              color: Color(0xFF1F1B2F),
+              fontWeight: FontWeight.bold, // Make the text bold
+            ),
+          ),
         ),
-      ),
-      floatingActionButton: ElevatedButton(
-        style: ElevatedButton.styleFrom(
-          backgroundColor: Colors.blue, // Set the button color to blue
-          padding: const EdgeInsets.symmetric(
-              vertical: 16,
-              horizontal: 24), // Increase the padding for a larger button
-        ),
-        onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) =>
-                    const IntroPage()), // Navigate to the IntroPage
-          );
-        },
-        child: const Text(
-          'Get Started',
-          style: TextStyle(
-              fontSize: 18,
-              color: Colors
-                  .white), // Increase the font size and set the text color to white
-        ),
-      ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-    );
+        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+      );
+    }
   }
-}
+

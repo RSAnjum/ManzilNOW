@@ -1,58 +1,158 @@
+import 'dart:async';
 
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'driverdetails.dart';
+
 class HistoryPage extends StatefulWidget {
   const HistoryPage({super.key});
-
   @override
   _HistoryPageState createState() => _HistoryPageState();
 }
 
 class _HistoryPageState extends State<HistoryPage> {
   int selectedCardIndex = -1;
-
   List<PreviousRide> previousRides = [
-    PreviousRide("123456", "John Doe", "10", "New York", "Los Angeles",
-      "9:00 AM", "2022-01-01", "Completed"),
-    PreviousRide("234567", "Jane Smith", "15", "San Francisco", "Seattle",
-      "2:30 PM", "2022-01-02", "Cancelled"),
-    PreviousRide("345678", "Mike Johnson", "8", "Chicago", "Miami", "6:45 PM",
-      "2022-01-03", "Completed"),
-    PreviousRide("456789", "Emily Brown", "12", "Boston", "Washington D.C.",
-      "11:15 AM", "2022-01-04", "Completed"),
-    PreviousRide("567890", "David Wilson", "7", "Houston", "Dallas", "4:20 PM",
-      "2022-01-05", "Cancelled"),
-    PreviousRide("678901", "Sarah Davis", "9", "Denver", "Las Vegas", "8:30 AM",
-      "2022-01-06", "Completed"),
-    PreviousRide("789012", "Michael Thompson", "11", "Atlanta", "Nashville",
-      "3:45 PM", "2022-01-07", "Completed"),
-    PreviousRide("890123", "Olivia Martinez", "14", "Phoenix", "San Diego",
-      "7:00 AM", "2022-01-08", "Cancelled"),
-    PreviousRide("901234", "James Taylor", "6", "Seattle", "Portland",
-      "5:30 PM", "2022-01-09", "Completed"),
-    PreviousRide("012345", "Sophia Anderson", "13", "Miami", "Orlando",
-      "10:45 AM", "2022-01-10", "Completed"),
-    PreviousRide("123450", "Benjamin Thomas", "8", "Dallas", "Houston",
-      "2:00 PM", "2022-01-11", "Cancelled"),
-    PreviousRide("234561", "Ava Jackson", "10", "Los Angeles", "San Francisco",
-      "6:15 AM", "2022-01-12", "Completed"),
-    PreviousRide("345672", "William White", "5", "Las Vegas", "Denver",
-      "1:30 PM", "2022-01-13", "Completed"),
-    PreviousRide("456783", "Mia Harris", "9", "Nashville", "Atlanta",
-      "4:45 PM", "2022-01-14", "Cancelled"),
-    PreviousRide("567894", "Liam Martin", "12", "San Diego", "Phoenix",
-      "9:30 AM", "2022-01-15", "Completed"),
-    PreviousRide("678905", "Charlotte Thompson", "7", "Portland", "Seattle",
-      "3:00 PM", "2022-01-16", "Completed"),
-    PreviousRide("789016", "Elijah Davis", "11", "Orlando", "Miami", "8:15 AM",
-      "2022-01-17", "Cancelled"),
+    PreviousRide(
+      rideID: "1",
+      driverID: "D001",
+      userID: "U001",
+      date: "2022-10-01",
+      time: "10:00 AM",
+      departure: "Location A",
+      destination: "Location B",
+      fare: "20.00",
+      status: "Completed",
+      driverFirstName: "John",
+      driverLastName: "Doe",
+      driverPhoto: "driver1.jpg",
+    ),
+    PreviousRide(
+      rideID: "2",
+      driverID: "D002",
+      userID: "U002",
+      date: "2022-10-02",
+      time: "11:00 AM",
+      departure: "Location C",
+      destination: "Location D",
+      fare: "15.00",
+      status: "Completed",
+      driverFirstName: "Jane",
+      driverLastName: "Smith",
+      driverPhoto: "driver2.jpg",
+    ),
+    PreviousRide(
+      rideID: "3",
+      driverID: "D003",
+      userID: "U003",
+      date: "2022-10-03",
+      time: "12:00 PM",
+      departure: "Location E",
+      destination: "Location F",
+      fare: "25.00",
+      status: "Completed",
+      driverFirstName: "David",
+      driverLastName: "Johnson",
+      driverPhoto: "driver3.jpg",
+    ),
+    PreviousRide(
+      rideID: "4",
+      driverID: "D004",
+      userID: "U004",
+      date: "2022-10-04",
+      time: "1:00 PM",
+      departure: "Location G",
+      destination: "Location H",
+      fare: "18.00",
+      status: "Completed",
+      driverFirstName: "Sarah",
+      driverLastName: "Williams",
+      driverPhoto: "driver4.jpg",
+    ),
+    PreviousRide(
+      rideID: "5",
+      driverID: "D005",
+      userID: "U005",
+      date: "2022-10-05",
+      time: "2:00 PM",
+      departure: "Location I",
+      destination: "Location J",
+      fare: "30.00",
+      status: "Completed",
+      driverFirstName: "Michael",
+      driverLastName: "Brown",
+      driverPhoto: "driver5.jpg",
+    ),
   ];
+
+  Future<void> fetchPreviousRides() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String passengerId = prefs.getString('token') ?? '';
+    print("sup nig:");
+    print(passengerId);
+    DatabaseReference rideRef =
+        FirebaseDatabase.instance.reference().child('Ride');
+    DatabaseReference driverRef =
+        FirebaseDatabase.instance.reference().child('driver');
+
+    rideRef
+        .orderByChild('userid')
+        .equalTo(passengerId)
+        .once()
+        .then((DataSnapshot snapshot) {
+          Map<dynamic, dynamic>? ridesData =
+              snapshot.value as Map<dynamic, dynamic>?;
+
+          if (ridesData != null) {
+            ridesData.forEach((key, value) async {
+              String driverID = value['driverid'];
+
+              // Fetch driver details
+              await driverRef
+                  .child(driverID)
+                  .once()
+                  .then((DataSnapshot driverSnapshot) {
+                    Map<dynamic, dynamic>? driverData =
+                        driverSnapshot.value as Map<dynamic, dynamic>?;
+
+                    if (driverData != null) {
+                      String firstName = driverData['firstName'];
+                      String lastName = driverData['lastName'];
+                      String personalPhoto = driverData['personalPhoto'];
+
+                      // Create a new PreviousRide object with driver details
+                      PreviousRide ride = PreviousRide(
+                        rideID: value['rideid'],
+                        driverID: driverID,
+                        userID: value['userid'],
+                        fare: value['fare'],
+                        departure: value['departure'],
+                        destination: value['destination'],
+                        time: value['time'],
+                        date: value['date'],
+                        status: value['status'],
+                        driverFirstName: firstName,
+                        driverLastName: lastName,
+                        driverPhoto: personalPhoto,
+                      );
+                      print("check:");
+                      print(ride.driverFirstName);
+
+                      previousRides.add(ride);
+                    }
+                  } as FutureOr Function(DatabaseEvent value));
+            });
+          }
+        } as FutureOr Function(DatabaseEvent value));
+  }
 
   @override
   Widget build(BuildContext context) {
+    fetchPreviousRides();
     return Scaffold(
       appBar: AppBar(
-        title: const Text("History Page"), // Add a title to the AppBar
+        title: const Text("History Page"),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back),
           onPressed: () {
@@ -140,7 +240,7 @@ class _HistoryPageState extends State<HistoryPage> {
                                     ),
                                     const SizedBox(height: 16.0),
                                     Text(
-                                      "Driver: ${previousRides[index].driverName}",
+                                      "Driver: ${previousRides[index].driverFirstName} ${previousRides[index].driverLastName}",
                                       style: const TextStyle(
                                           fontWeight: FontWeight.bold),
                                     ),
@@ -183,26 +283,34 @@ class _HistoryPageState extends State<HistoryPage> {
                                     const SizedBox(height: 16.0),
                                     ElevatedButton(
                                       style: ElevatedButton.styleFrom(
-                                        foregroundColor: Colors.white, backgroundColor: Colors.green, // Set text color to white
+                                        foregroundColor: Colors.white,
+                                        backgroundColor: Colors
+                                            .green, // Set text color to white
                                       ),
                                       onPressed: () {
                                         Navigator.push(
                                           context,
                                           MaterialPageRoute(
-                                            builder: (context) => DriverDetailsPage(
-                                              rideID: previousRides[index].rideID,
-                                              driverName: previousRides[index].driverName,
-                                              fare: double.parse(previousRides[index].fare),
-                                              destination: previousRides[index].destination,
-                                              departure: previousRides[index].departure,
+                                            builder: (context) =>
+                                                DriverDetailsPage(
+                                              rideID:
+                                                  previousRides[index].rideID,
+                                              driverName:
+                                                  "${previousRides[index].driverFirstName} ${previousRides[index].driverLastName}",
+                                              fare: double.parse(
+                                                  previousRides[index].fare),
+                                              destination: previousRides[index]
+                                                  .destination,
+                                              departure: previousRides[index]
+                                                  .departure,
                                               time: previousRides[index].time,
                                               date: previousRides[index].date,
-                                              status: previousRides[index].status,
+                                              status:
+                                                  previousRides[index].status,
                                             ),
                                           ),
                                         );
                                       },
-                                      
                                       child: const Text('Details'),
                                     ),
                                   ],
@@ -225,22 +333,30 @@ class _HistoryPageState extends State<HistoryPage> {
 
 class PreviousRide {
   final String rideID;
-  final String driverName;
-  final String fare;
-  final String destination;
-  final String departure;
-  final String time;
+  final String driverID;
+  final String userID;
   final String date;
+  final String time;
+  final String departure;
+  final String destination;
+  final String fare;
   final String status;
+  final String driverFirstName;
+  final String driverLastName;
+  final String driverPhoto;
 
-  PreviousRide(
-    this.rideID,
-    this.driverName,
-    this.fare,
-    this.destination,
-    this.departure,
-    this.time,
-    this.date,
-    this.status,
-  );
+  PreviousRide({
+    required this.rideID,
+    required this.driverID,
+    required this.userID,
+    required this.date,
+    required this.time,
+    required this.departure,
+    required this.destination,
+    required this.fare,
+    required this.status,
+    required this.driverFirstName,
+    required this.driverLastName,
+    required this.driverPhoto,
+  });
 }

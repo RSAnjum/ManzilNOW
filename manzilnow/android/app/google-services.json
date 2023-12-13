@@ -1,13 +1,14 @@
 {
   "project_info": {
-    "project_number": "155049926723",
-    "project_id": "manzilnow-becc3",
-    "storage_bucket": "manzilnow-becc3.appspot.com"
+    "project_number": "930777869598",
+    "firebase_url": "https://manzilnow-default-rtdb.firebaseio.com",
+    "project_id": "manzilnow",
+    "storage_bucket": "manzilnow.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:155049926723:android:2d4c31d5fc4641560c74f6",
+        "mobilesdk_app_id": "1:930777869598:android:b1b645cc29c25638d3ad0f",
         "android_client_info": {
           "package_name": "com.example.manzilnow"
         }
@@ -15,7 +16,26 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8"
+          "current_key": "AIzaSyCLKQ7Aehh1gVhqTQ7QmMlOB1DAVpbX098"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:930777869598:android:2f07325d0e4082f5d3ad0f",
+        "android_client_info": {
+          "package_name": "com.manzilnow.driver_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLKQ7Aehh1gVhqTQ7QmMlOB1DAVpbX098"
         }
       ],
       "services": {

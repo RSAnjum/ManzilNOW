@@ -18,21 +18,22 @@ import 'package:flutter/material.dart';
     final List<Map<String, dynamic>> _cards = [
       {
         'image': 'assets/image1.jpg',
-        'text': 'Card 1',
+        'text': '',
       },
       {
         'image': 'assets/image2.jpg',
-        'text': 'Card 2',
+        'text': '',
       },
       {
         'image': 'assets/image3.jpg',
-        'text': 'Card 3',
+        'text': '',
       },
     ];
 
     @override
     Widget build(BuildContext context) {
       return Scaffold(
+         backgroundColor: const Color(0xFF1F1B2F),
         body: Column(
           children: [
             Expanded(
@@ -44,10 +45,12 @@ import 'package:flutter/material.dart';
                     _currentPage = index;
                   });
                 },
+                
                 itemBuilder: (context, index) {
                   return CardWidget(
                     image: _cards[index]['image'],
                     text: _cards[index]['text'],
+                    
                   );
                 },
               ),
@@ -72,20 +75,22 @@ import 'package:flutter/material.dart';
                   );
                 }
               },
-              style: ElevatedButton.styleFrom(
-                foregroundColor: Colors.white, backgroundColor: Colors.blue,
+              style: ElevatedButton.styleFrom( backgroundColor: Color(0xFF0DF5E3),
                 padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 16),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(30),
                 ),
                 elevation: 2,
               ),
-              child: const Text(
-                'Continue',
-                style: TextStyle(fontSize: 18),
-              ),
+              child:  const Text(
+            'CONTINUE',
+            style: TextStyle(
+              fontFamily: 'Sans',
+              color: Color(0xFF1F1B2F),
+              fontWeight: FontWeight.bold, // Make the text bold
             ),
-            const SizedBox(height: 16),
+            ),
+            )
           ],
         ),
       );

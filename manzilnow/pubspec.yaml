@@ -31,14 +31,16 @@ dependencies:
   flutter:
     sdk: flutter
     
-  carousel_slider: ^4.2.1
-  firebase_core: ^2.24.1
+  
+  firebase_core: ^2.24.2
   firebase_auth: ^4.15.2
   firebase_database: ^10.3.7
   image_picker: ^1.0.4
   firebase_storage: ^11.5.4
   file_picker: ^6.1.1
   shared_preferences: ^2.2.2
+  firebase_app_check: ^0.2.1+8
+  google_fonts: ^6.1.0
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -56,7 +58,7 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^2.0.0
+  flutter_lints: ^3.0.1
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -74,6 +76,10 @@ flutter:
       - assets/
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  fonts:
+      - family: Sans
+        fonts:
+        - asset: fonts/RethinkSans-Regular.ttf
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
