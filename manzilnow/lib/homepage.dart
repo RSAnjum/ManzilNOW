@@ -18,7 +18,7 @@ class _HomePageState extends State<HomePage>
   late AnimationController _animationController;
   late Animation<double> _animation;
 
-  String userName = ''; // Initialize userName as an empty string
+  String userName = ''; 
   String userProfilePhoto =
       'assets/usr.png'; // Replace 'assets/profile_photo.png' with the path to the user's profile photo
 

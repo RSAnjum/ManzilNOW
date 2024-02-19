@@ -21,7 +21,8 @@ class Signup extends StatefulWidget {
 
 class _SignupState extends State<Signup> {
   final Passenger driver = Passenger();
-  final databaseReference = FirebaseDatabase.instance.reference().child("passenger");
+  final databaseReference =
+      FirebaseDatabase.instance.reference().child("passenger");
   final TextEditingController firstNameController = TextEditingController();
   final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
@@ -44,15 +45,13 @@ class _SignupState extends State<Signup> {
   }
 
   void validateAndSubmit() {
-    if (
-      firstNameController.text.isEmpty ||
-      lastNameController.text.isEmpty ||
-      emailController.text.isEmpty ||
-      passwordController.text.isEmpty ||
-      phoneNumberController.text.isEmpty ||
-      selectedGender == null ||
-      selectedDate == null
-    ) {
+    if (firstNameController.text.isEmpty ||
+        lastNameController.text.isEmpty ||
+        emailController.text.isEmpty ||
+        passwordController.text.isEmpty ||
+        phoneNumberController.text.isEmpty ||
+        selectedGender == null ||
+        selectedDate == null) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
           content: Text("Please enter all fields"),
@@ -84,26 +83,42 @@ class _SignupState extends State<Signup> {
 
     passengerID = DateTime.now().microsecondsSinceEpoch.toString();
 
-    // Set user details
-    driver.firstName = firstNameController.text;
-    driver.lastName = lastNameController.text;
-    driver.email = emailController.text;
-    driver.password = passwordController.text;
-    driver.phoneNumber = phoneNumberController.text;
-    driver.gender = selectedGender;
-    driver.dateOfBirth = selectedDate!.toIso8601String();
+    // Check if email already exists
+    databaseReference
+        .orderByChild("email")
+        .equalTo(emailController.text)
+        .once()
+        .then((DatabaseEvent snapshot) {
+      if (snapshot.snapshot.value != null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text("Email already exists"),
+            duration: Duration(seconds: 2),
+          ),
+        );
+      } else {
+        // Set user details
+        driver.firstName = firstNameController.text;
+        driver.lastName = lastNameController.text;
+        driver.email = emailController.text;
+        driver.password = passwordController.text;
+        driver.phoneNumber = phoneNumberController.text;
+        driver.gender = selectedGender;
+        driver.dateOfBirth = selectedDate!.toIso8601String();
 
-    // Add user details to the Firebase Realtime Database
-    databaseReference.child(passengerID).set({
-      "passengerId": passengerID,
-      "firstName": driver.firstName,
-      "lastName": driver.lastName,
-      "email": driver.email,
-      "password": driver.password,
-      "phoneNumber": driver.phoneNumber,
-      "dateOfBirth": driver.dateOfBirth,
-      "gender": driver.gender,
-      "restrictUser": false,
+        // Add user details to the Firebase Realtime Database
+        databaseReference.child(passengerID).set({
+          "passengerId": passengerID,
+          "firstName": driver.firstName,
+          "lastName": driver.lastName,
+          "email": driver.email,
+          "password": driver.password,
+          "phoneNumber": driver.phoneNumber,
+          "dateOfBirth": driver.dateOfBirth,
+          "gender": driver.gender,
+          "restrictUser": false,
+        });
+      }
     });
 
     // Navigate to the next screen (VehicleRegistration)
@@ -238,8 +253,7 @@ class _SignupState extends State<Signup> {
                   labelText: 'Gender',
                   prefixIcon: Icon(Icons.person_2_outlined),
                 ),
-                items: <String>['Male', 'Female', 'Other']
-                    .map((String value) {
+                items: <String>['Male', 'Female', 'Other'].map((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
                     child: Text(value),
@@ -282,10 +296,10 @@ class _SignupState extends State<Signup> {
                 },
               ),
             ),
-           // ... (Previous code)
+            // ... (Previous code)
 
             SizedBox(height: 10.0),
-             Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text("Already Have an Account? "),
@@ -326,8 +340,7 @@ class _SignupState extends State<Signup> {
               ),
             ),
 
-                       SizedBox(height: 16.0),
-
+            SizedBox(height: 16.0),
           ],
         ),
       ),
