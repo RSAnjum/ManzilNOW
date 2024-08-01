@@ -1,0 +1,195 @@
+{
+  "project_info": {
+    "project_number": "155049926723",
+    "firebase_url": "https://manzilnow-becc3-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "manzilnow-becc3",
+    "storage_bucket": "manzilnow-becc3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155049926723:android:2d4c31d5fc4641560c74f6",
+        "android_client_info": {
+          "package_name": "com.example.manzilnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155049926723-f0h1pfu05d4j2laqdgmgvn75foccr3n9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.manzilnow",
+            "certificate_hash": "dfbc3b844f78f4ed29389c745984894f76044ec2"
+          }
+        },
+        {
+          "client_id": "155049926723-gsbmsr7153gk2v6qs2ggi5fstpak58vr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.manzilnow",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "155049926723-r7fjlpod5tmor2e4acullsku56ahetfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155049926723-5ern9ml9pbg8t58pgc0t67cbpbmbfo17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "155049926723-aeulqmepiufj7mtsfsnccpo40p7hhnk0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.drivermanzilnow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155049926723:android:0faf7aecf2662f370c74f6",
+        "android_client_info": {
+          "package_name": "com.mycompany.drivermanzilnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155049926723-10shemeibmf2bjqd5csloiu49vmslc6h.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.drivermanzilnow",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "155049926723-r7fjlpod5tmor2e4acullsku56ahetfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155049926723-5ern9ml9pbg8t58pgc0t67cbpbmbfo17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "155049926723-aeulqmepiufj7mtsfsnccpo40p7hhnk0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.drivermanzilnow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155049926723:android:90a5afe12e90e4670c74f6",
+        "android_client_info": {
+          "package_name": "com.mycompany.fmll"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155049926723-vrno7c3fn139uku50mf0rrisj3dm2ts8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.fmll",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "155049926723-r7fjlpod5tmor2e4acullsku56ahetfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155049926723-5ern9ml9pbg8t58pgc0t67cbpbmbfo17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "155049926723-aeulqmepiufj7mtsfsnccpo40p7hhnk0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.drivermanzilnow"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:155049926723:android:1771d777cdca367a0c74f6",
+        "android_client_info": {
+          "package_name": "com.mycompany.manzilnow"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "155049926723-1hd0vc1k3pe2lbm26pvd53vslnk8frks.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mycompany.manzilnow",
+            "certificate_hash": "9bbb3186b2189ef16d8f272bdab59362c395cbb4"
+          }
+        },
+        {
+          "client_id": "155049926723-r7fjlpod5tmor2e4acullsku56ahetfm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCFwWBkpzTTQBdeky5GBJiIk8b04zozds8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "155049926723-5ern9ml9pbg8t58pgc0t67cbpbmbfo17.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "155049926723-aeulqmepiufj7mtsfsnccpo40p7hhnk0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mycompany.drivermanzilnow"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
